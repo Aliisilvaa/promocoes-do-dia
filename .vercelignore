@@ -1,0 +1,7 @@
+.claude/
+.server.cjs
+.clean-pngs.py
+.DS_Store
+TUTORIAL.md
+*.zip
+*.log

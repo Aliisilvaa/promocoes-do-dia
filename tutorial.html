@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tutorial — Como editar o site Promoções do Dia</title>
+<meta name="description" content="Tutorial visual passo a passo pra editar o site Promoções do Dia. Trocar imagens, textos, link do WhatsApp, Pixel da Meta e mais." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --pink: #E91E63;
+    --pink-d: #C2185B;
+    --pink-l: #FCE4EC;
+    --yellow: #FFD600;
+    --green: #25D366;
+    --gray-50: #FAFBFC;
+    --gray-100: #F6F8FA;
+    --gray-200: #E1E4E8;
+    --gray-300: #D1D5DA;
+    --gray-500: #6A737D;
+    --gray-700: #24292E;
+    --gray-900: #0D1117;
+    --gh-blue: #0969DA;
+    --gh-green: #2DA44E;
+    --vc-black: #000;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Poppins', -apple-system, sans-serif;
+    color: var(--gray-700);
+    background: linear-gradient(180deg, #FFF 0%, #FFF5F8 100%);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* HEADER */
+  .hero {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-d) 100%);
+    color: white;
+    padding: 56px 24px;
+    text-align: center;
+    border-radius: 0 0 32px 32px;
+    box-shadow: 0 20px 60px rgba(233,30,99,.25);
+  }
+  .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900; margin-bottom: 12px; }
+  .hero p { font-size: clamp(1rem, 2.5vw, 1.15rem); opacity: .95; max-width: 600px; margin: 0 auto; }
+  .hero .badge {
+    display: inline-block; background: var(--yellow); color: var(--gray-900);
+    padding: 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 800;
+    margin-bottom: 20px; letter-spacing: .05em;
+  }
+
+  /* WRAPPER */
+  .wrap { max-width: 880px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  /* SUMMARY TOC */
+  .toc {
+    background: white; border: 1px solid var(--gray-200); border-radius: 16px;
+    padding: 24px 28px; margin-bottom: 40px; box-shadow: 0 4px 16px rgba(0,0,0,.04);
+  }
+  .toc h2 { color: var(--pink); font-size: 1.15rem; margin-bottom: 14px; }
+  .toc ol { list-style: none; counter-reset: step; }
+  .toc ol li {
+    counter-increment: step; padding: 6px 0 6px 36px; position: relative;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .toc ol li:last-child { border-bottom: none; }
+  .toc ol li::before {
+    content: counter(step); position: absolute; left: 0; top: 6px;
+    width: 26px; height: 26px; background: var(--pink); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px;
+  }
+  .toc a { color: var(--gray-700); text-decoration: none; font-weight: 500; }
+  .toc a:hover { color: var(--pink); }
+
+  /* STEPS */
+  .step {
+    background: white; border: 1px solid var(--gray-200); border-radius: 20px;
+    padding: 32px 28px; margin-bottom: 32px; box-shadow: 0 6px 20px rgba(0,0,0,.05);
+    scroll-margin-top: 20px;
+  }
+  .step-tag {
+    display: inline-block; background: var(--pink-l); color: var(--pink-d);
+    padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 700;
+    margin-bottom: 10px; letter-spacing: .03em; text-transform: uppercase;
+  }
+  .step h2 {
+    color: var(--gray-900); font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+    font-weight: 800; margin-bottom: 16px; line-height: 1.25;
+  }
+  .step h3 { color: var(--gray-700); font-size: 1.05rem; margin: 24px 0 10px; font-weight: 700; }
+  .step p { margin-bottom: 12px; }
+  .step ol, .step ul { margin: 12px 0 16px 22px; }
+  .step li { margin-bottom: 8px; }
+  .step code {
+    background: var(--gray-100); padding: 2px 6px; border-radius: 4px;
+    font-size: .9em; color: var(--pink-d); border: 1px solid var(--gray-200);
+  }
+
+  /* TIPS */
+  .tip, .warn, .info {
+    border-left: 4px solid var(--gh-blue);
+    background: #F0F7FF; padding: 14px 18px; border-radius: 8px;
+    margin: 18px 0; font-size: .95rem;
+  }
+  .warn { border-left-color: #D97706; background: #FFFBEB; }
+  .tip { border-left-color: var(--gh-green); background: #F0FDF4; }
+
+  /* BROWSER MOCK */
+  .browser {
+    background: white; border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--gray-200); box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    margin: 20px 0; font-size: 13px;
+  }
+  .browser-bar {
+    background: var(--gray-100); padding: 10px 14px; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .browser-dots { display: flex; gap: 6px; }
+  .browser-dots span {
+    width: 12px; height: 12px; border-radius: 50%; background: var(--gray-300);
+  }
+  .browser-dots span:nth-child(1) { background: #FF5F57; }
+  .browser-dots span:nth-child(2) { background: #FEBC2E; }
+  .browser-dots span:nth-child(3) { background: #28C840; }
+  .browser-url {
+    flex: 1; background: white; border: 1px solid var(--gray-200); border-radius: 100px;
+    padding: 5px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gray-500);
+  }
+  .browser-body { padding: 0; background: white; }
+
+  /* GITHUB UI MOCK */
+  .gh-header {
+    background: var(--gray-900); color: white; padding: 12px 16px;
+    display: flex; align-items: center; gap: 12px; font-size: 14px;
+  }
+  .gh-header svg { width: 24px; height: 24px; }
+  .gh-repo {
+    padding: 16px; background: white; border-bottom: 1px solid var(--gray-200);
+  }
+  .gh-breadcrumb { font-size: 18px; font-weight: 600; }
+  .gh-breadcrumb a { color: var(--gh-blue); text-decoration: none; }
+  .gh-breadcrumb a:hover { text-decoration: underline; }
+  .gh-files {
+    background: white; padding: 0; font-size: 14px;
+  }
+  .gh-file {
+    padding: 10px 16px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; gap: 10px;
+    cursor: pointer;
+  }
+  .gh-file:hover { background: var(--gray-50); }
+  .gh-file.highlight { background: #FFF9C4; }
+  .gh-file-icon { width: 18px; height: 18px; flex-shrink: 0; }
+  .gh-file-name { color: var(--gh-blue); font-weight: 500; }
+  .gh-file-folder { font-weight: 600; }
+  .gh-file-size { margin-left: auto; color: var(--gray-500); font-size: 12px; }
+
+  /* GITHUB EDIT VIEW */
+  .gh-edit-toolbar {
+    background: var(--gray-100); padding: 8px 14px; border-bottom: 1px solid var(--gray-200);
+    display: flex; align-items: center; gap: 8px; font-size: 13px;
+  }
+  .gh-edit-toolbar .filename { font-family: 'JetBrains Mono', monospace; color: var(--gray-700); }
+  .gh-edit-toolbar .pencil {
+    background: var(--gh-blue); color: white; padding: 4px 10px; border-radius: 6px;
+    font-size: 12px; font-weight: 600; margin-left: auto;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .gh-edit-toolbar .pencil.pulse { animation: pulse-pencil 1.5s infinite; }
+  @keyframes pulse-pencil {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(9,105,218,.5); }
+    50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(9,105,218,0); }
+  }
+  .gh-code {
+    background: var(--gray-900); color: #E1E4E8; padding: 18px 16px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.7;
+    overflow-x: auto;
+  }
+  .gh-code .line { display: flex; gap: 14px; }
+  .gh-code .ln { color: #6E7681; text-align: right; user-select: none; min-width: 24px; }
+  .gh-code .hl { background: rgba(255,214,0,.18); display: inline-block; width: 100%; }
+  .gh-code .kw { color: #FF7B72; }
+  .gh-code .str { color: #A5D6FF; }
+  .gh-code .com { color: #8B949E; }
+  .gh-code .pun { color: #C9D1D9; }
+
+  .gh-commit {
+    padding: 16px; background: var(--gray-50); border-top: 1px solid var(--gray-200);
+  }
+  .gh-commit input, .gh-commit textarea {
+    width: 100%; padding: 8px 12px; border: 1px solid var(--gray-300); border-radius: 6px;
+    font-family: inherit; font-size: 13px; margin-bottom: 8px;
+  }
+  .gh-commit-btn {
+    background: var(--gh-green); color: white; padding: 8px 18px; border-radius: 6px;
+    font-weight: 600; display: inline-block; font-size: 13px; border: 0; cursor: pointer;
+  }
+  .gh-commit-btn.pulse { animation: pulse-green 1.5s infinite; }
+  @keyframes pulse-green {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(45,164,78,.5); }
+    50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(45,164,78,0); }
+  }
+
+  /* VERCEL UI MOCK */
+  .vc-header {
+    background: var(--vc-black); color: white; padding: 12px 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .vc-content { padding: 16px; }
+  .vc-deploy {
+    display: flex; align-items: center; padding: 10px 14px;
+    border: 1px solid var(--gray-200); border-radius: 8px; margin-bottom: 8px;
+    gap: 12px; font-size: 13px;
+  }
+  .vc-deploy .status {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--gh-green); flex-shrink: 0;
+  }
+  .vc-deploy .branch {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gray-500);
+    background: var(--gray-100); padding: 2px 6px; border-radius: 4px;
+  }
+  .vc-deploy .menu {
+    margin-left: auto; padding: 4px 8px; font-weight: 700; color: var(--gray-500); cursor: pointer;
+  }
+  .vc-deploy.highlight { background: #FFF9C4; border-color: var(--yellow); }
+
+  /* CTA FINAL */
+  .final-cta {
+    background: linear-gradient(135deg, var(--green) 0%, #128C7E 100%);
+    color: white; padding: 36px 28px; border-radius: 20px;
+    text-align: center; margin: 40px 0 0; box-shadow: 0 12px 30px rgba(37,211,102,.25);
+  }
+  .final-cta h2 { font-size: 1.5rem; margin-bottom: 8px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .step { padding: 24px 18px; border-radius: 16px; }
+    .gh-edit-toolbar { flex-wrap: wrap; }
+    .gh-code { font-size: 11px; padding: 14px 10px; }
+  }
+
+  /* FAQ */
+  .faq details {
+    background: white; border: 1px solid var(--gray-200); border-radius: 12px;
+    padding: 0; margin-bottom: 10px; overflow: hidden;
+  }
+  .faq summary {
+    padding: 14px 18px; font-weight: 600; cursor: pointer; list-style: none;
+    background: var(--gray-50); display: flex; align-items: center; justify-content: space-between;
+  }
+  .faq summary::after { content: '+'; font-size: 20px; color: var(--pink); font-weight: 800; }
+  .faq details[open] summary::after { content: '−'; }
+  .faq summary:hover { background: var(--gray-100); }
+  .faq details[open] summary { background: var(--pink-l); color: var(--pink-d); }
+  .faq-body { padding: 14px 18px 18px; }
+
+  .nav-jump {
+    position: fixed; bottom: 20px; right: 20px; z-index: 100;
+    background: var(--pink); color: white; padding: 12px 18px;
+    border-radius: 100px; text-decoration: none; font-weight: 700; font-size: 14px;
+    box-shadow: 0 10px 24px rgba(233,30,99,.4);
+  }
+  .nav-jump:hover { transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <span class="badge">📘 Tutorial passo a passo</span>
+  <h1>Como editar o site Promoções do Dia</h1>
+  <p>Tudo em português, com prints das telas. Sem mexer em Terminal nem código difícil.</p>
+</section>
+
+<div class="wrap">
+
+  <!-- ÍNDICE -->
+  <div class="toc">
+    <h2>📑 O que você vai aprender</h2>
+    <p style="color:var(--gray-500);font-size:.9rem;margin-bottom:14px;">
+      <strong>Parte 1 — Setup inicial</strong> (uma vez só, ~10 minutos)
+    </p>
+    <ol style="counter-reset: step;">
+      <li><a href="#cap-0">Receber o arquivo ZIP e descompactar</a></li>
+      <li><a href="#cap-0b">Criar conta no GitHub (se ainda não tem)</a></li>
+      <li><a href="#cap-0c">Criar o repositório do site no GitHub</a></li>
+      <li><a href="#cap-0d">Subir os arquivos do ZIP pro GitHub</a></li>
+      <li><a href="#cap-0e">Criar conta na Vercel e conectar ao GitHub</a></li>
+      <li><a href="#cap-0f">Fazer o primeiro deploy (publicar o site)</a></li>
+    </ol>
+    <p style="color:var(--gray-500);font-size:.9rem;margin:20px 0 14px;">
+      <strong>Parte 2 — Edições do dia a dia</strong> (sempre que precisar)
+    </p>
+    <ol style="counter-reset: step 6;">
+      <li><a href="#cap-1">Acessar os arquivos do site no GitHub</a></li>
+      <li><a href="#cap-2">Trocar o link do WhatsApp</a></li>
+      <li><a href="#cap-3">Configurar o Pixel da Meta (Facebook)</a></li>
+      <li><a href="#cap-4">Mudar os textos da página</a></li>
+      <li><a href="#cap-5">Trocar a foto de fundo (Aline)</a></li>
+      <li><a href="#cap-6">Trocar a logo do grupo</a></li>
+      <li><a href="#cap-7">Adicionar/remover/trocar marketplaces</a></li>
+      <li><a href="#cap-8">Adicionar/remover nomes do pop-up</a></li>
+      <li><a href="#cap-9">Ver o site atualizado</a></li>
+      <li><a href="#cap-10">Voltar uma versão antiga (rollback)</a></li>
+      <li><a href="#cap-11">Configurar domínio próprio</a></li>
+      <li><a href="#cap-faq">Dúvidas frequentes</a></li>
+    </ol>
+  </div>
+
+  <!-- =================================================== -->
+  <!-- PARTE 1: SETUP INICIAL (DO ZERO ATÉ O SITE NO AR)   -->
+  <!-- =================================================== -->
+
+  <div style="background:linear-gradient(135deg,var(--pink-l) 0%, #FFF 100%); padding:24px 28px; border-radius:16px; margin-bottom:24px; border:2px dashed var(--pink);">
+    <h2 style="color:var(--pink-d);font-size:1.3rem;margin-bottom:8px;">🚀 Parte 1 — Setup inicial</h2>
+    <p>Esta parte você faz <strong>uma vez só</strong>. Depois disso, é só editar como mostrado na Parte 2 e o site atualiza sozinho.</p>
+  </div>
+
+  <!-- =================== CAP 0 — RECEBER ZIP =================== -->
+  <section id="cap-0" class="step">
+    <span class="step-tag">Capítulo 1 (Setup)</span>
+    <h2>Receber o arquivo ZIP e descompactar</h2>
+
+    <p>O desenvolvedor te mandou um arquivo chamado <code>promocoes-do-dia.zip</code> (cerca de 250 KB) por WhatsApp, e-mail, ou outro meio.</p>
+
+    <h3>Passo 1.1 — Salve o ZIP no Desktop</h3>
+    <p>Pra não esquecer onde está, salve em <strong>Desktop</strong> (computador) ou <strong>Downloads</strong>.</p>
+
+    <h3>Passo 1.2 — Descompacte (extrair)</h3>
+    <ul>
+      <li><strong>Mac</strong>: clique duas vezes no ZIP. Ele cria a pasta <code>Achadinhos Aline</code> ao lado.</li>
+      <li><strong>Windows</strong>: clique com botão direito → <em>Extrair tudo</em> → <em>Extrair</em>.</li>
+    </ul>
+
+    <h3>Passo 1.3 — Veja o que tem dentro</h3>
+    <p>Dentro da pasta extraída tem estes arquivos:</p>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">📁 Achadinhos Aline (pasta no seu computador)</div>
+      </div>
+      <div class="gh-files">
+        <div class="gh-file gh-file-folder">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#54AEFF"><path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75Z"/></svg>
+          <span>assets</span><span class="gh-file-size">imagens do site</span>
+        </div>
+        <div class="gh-file">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+          <span class="gh-file-name">config.js</span><span class="gh-file-size">configurações do site</span>
+        </div>
+        <div class="gh-file">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+          <span class="gh-file-name">index.html</span><span class="gh-file-size">página principal</span>
+        </div>
+        <div class="gh-file">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+          <span class="gh-file-name">styles.css</span>
+        </div>
+        <div class="gh-file">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+          <span class="gh-file-name">script.js</span>
+        </div>
+        <div class="gh-file">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+          <span class="gh-file-name">vercel.json</span>
+        </div>
+        <div class="gh-file">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+          <span class="gh-file-name">tutorial.html</span><span class="gh-file-size">este tutorial!</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip">
+      💡 <strong>Não apague nenhum arquivo!</strong> Todos são necessários pro site funcionar.
+    </div>
+  </section>
+
+  <!-- =================== CAP 0B — CONTA GITHUB =================== -->
+  <section id="cap-0b" class="step">
+    <span class="step-tag">Capítulo 2 (Setup)</span>
+    <h2>Criar conta no GitHub (se ainda não tem)</h2>
+
+    <p>O GitHub é onde os arquivos do site vão ficar guardados na nuvem. É grátis pra sempre.</p>
+
+    <h3>Passo 2.1 — Abra a página de cadastro</h3>
+    <p>Acesse no navegador:</p>
+    <p class="mono" style="font-size:14px;background:var(--gray-100);padding:10px 14px;border-radius:8px;color:var(--pink-d);">
+      https://github.com/signup
+    </p>
+
+    <h3>Passo 2.2 — Preencha os dados</h3>
+    <ol>
+      <li><strong>Email</strong>: use um email que você usa de verdade (você vai precisar confirmar)</li>
+      <li><strong>Senha</strong>: 15 caracteres ou mais — anote em um lugar seguro</li>
+      <li><strong>Username</strong>: seu nome de usuário (ex: <code>marketing-aline</code>, <code>achadinhosaline</code>). Sem espaços, sem acentos.</li>
+      <li>Confirme o email clicando no link que o GitHub manda</li>
+    </ol>
+
+    <div class="warn">
+      ⚠️ <strong>Anote o seu username!</strong> Vai ser usado em todas as URLs do site (ex: <code>github.com/SEU-USERNAME/promocoes-do-dia</code>).
+    </div>
+
+    <h3>Passo 2.3 — Pule o questionário inicial</h3>
+    <p>O GitHub vai te fazer algumas perguntas iniciais ("qual sua experiência?", etc). Pode clicar em <strong>Skip</strong> em tudo.</p>
+
+    <h3>Passo 2.4 — Pronto!</h3>
+    <p>Conta criada. Você vai ver uma tela de "boas-vindas" com o logo do GitHub no canto superior esquerdo.</p>
+
+    <div class="tip">
+      🆓 GitHub é grátis pra sempre pra esse uso. Sem cartão de crédito, sem trial.
+    </div>
+  </section>
+
+  <!-- =================== CAP 0C — CRIAR REPO =================== -->
+  <section id="cap-0c" class="step">
+    <span class="step-tag">Capítulo 3 (Setup)</span>
+    <h2>Criar o repositório do site no GitHub</h2>
+
+    <p>"Repositório" é o nome chique pra "pasta na nuvem". Vamos criar um pra esse site.</p>
+
+    <h3>Passo 3.1 — Clique em "New"</h3>
+    <p>Acesse:</p>
+    <p class="mono" style="font-size:14px;background:var(--gray-100);padding:10px 14px;border-radius:8px;color:var(--pink-d);">
+      https://github.com/new
+    </p>
+
+    <h3>Passo 3.2 — Preencha o formulário</h3>
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">github.com/new</div>
+      </div>
+      <div style="padding:18px 16px;background:white;font-size:13px;">
+        <p style="font-weight:700;margin-bottom:6px;">Repository name <span style="color:#D1242F;">*</span></p>
+        <div style="padding:8px 12px;border:1px solid var(--gh-blue);border-radius:6px;background:#F0F7FF;font-family:'JetBrains Mono',monospace;margin-bottom:14px;">
+          promocoes-do-dia
+        </div>
+
+        <p style="font-weight:700;margin-bottom:6px;">Description <span style="color:#6E7681;">(optional)</span></p>
+        <div style="padding:8px 12px;border:1px solid var(--gray-300);border-radius:6px;margin-bottom:14px;color:var(--gray-500);">
+          Landing page do grupo Promoções do Dia
+        </div>
+
+        <p style="margin-bottom:10px;"><label><input type="radio" checked> 🌎 <strong>Public</strong> — qualquer pessoa pode ver os arquivos</label></p>
+        <p style="margin-bottom:14px;"><label><input type="radio"> 🔒 Private — só você vê (também funciona, mas Vercel free funciona melhor com Public)</label></p>
+
+        <p style="margin-bottom:6px;color:var(--gray-500);">⚠️ Initialize this repository with:</p>
+        <p style="padding-left:20px;color:var(--gray-500);"><label><input type="checkbox"> Add a README file (deixe DESMARCADO)</label></p>
+        <p style="padding-left:20px;color:var(--gray-500);"><label><input type="checkbox"> Add .gitignore (deixe DESMARCADO)</label></p>
+        <p style="padding-left:20px;margin-bottom:18px;color:var(--gray-500);"><label><input type="checkbox"> Choose a license (deixe DESMARCADO)</label></p>
+
+        <button class="gh-commit-btn pulse">Create repository</button>
+      </div>
+    </div>
+
+    <h3>Passo 3.3 — Configurações importantes</h3>
+    <ol>
+      <li><strong>Repository name</strong>: digite <code>promocoes-do-dia</code> (sem espaços, sem acentos)</li>
+      <li>Escolha <strong>Public</strong> (recomendado — permite usar Vercel grátis sem limitações)</li>
+      <li><strong>NÃO marque</strong> nenhuma das opções de "Initialize" — deixe TUDO desmarcado</li>
+      <li>Clique no botão verde <strong>Create repository</strong></li>
+    </ol>
+
+    <div class="warn">
+      ⚠️ <strong>Importante</strong>: NÃO marque "Add a README" nem "Add .gitignore". Se marcar, o upload do ZIP vai dar conflito.
+    </div>
+  </section>
+
+  <!-- =================== CAP 0D — UPLOAD ARQUIVOS =================== -->
+  <section id="cap-0d" class="step">
+    <span class="step-tag">Capítulo 4 (Setup)</span>
+    <h2>Subir os arquivos do ZIP pro GitHub</h2>
+
+    <p>Repositório criado, agora vamos colocar os arquivos dentro.</p>
+
+    <h3>Passo 4.1 — Clique em "uploading an existing file"</h3>
+    <p>Depois de criar o repositório, você vai cair numa tela com várias opções. Procure esta linha:</p>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">github.com/SEU-USUARIO/promocoes-do-dia</div>
+      </div>
+      <div style="padding:16px;background:white;font-size:13px;">
+        <p style="font-weight:700;margin-bottom:10px;">Quick setup</p>
+        <p style="color:var(--gray-500);margin-bottom:14px;">…or create a new repository on the command line</p>
+        <p style="background:#FFF9C4;padding:10px 14px;border-radius:6px;border:2px solid var(--yellow);">
+          …or push an existing repository from the command line<br>
+          …or <a href="#" style="color:var(--gh-blue);font-weight:700;text-decoration:underline;">uploading an existing file</a> ← <strong>CLIQUE AQUI</strong>
+        </p>
+      </div>
+    </div>
+
+    <h3>Passo 4.2 — Arraste os arquivos do ZIP</h3>
+    <p>Vai abrir uma tela com uma área grande tracejada. Faça assim:</p>
+    <ol>
+      <li>Abra a pasta <code>Achadinhos Aline</code> que você descompactou no Capítulo 1</li>
+      <li><strong>Selecione TODOS os arquivos e pastas de dentro</strong> (Ctrl+A no Windows / Cmd+A no Mac)</li>
+      <li><strong>Arraste tudo</strong> pra área tracejada do GitHub</li>
+      <li>Aguarde os uploads completarem (barra azul de progresso)</li>
+    </ol>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">github.com/SEU-USUARIO/promocoes-do-dia/upload/main</div>
+      </div>
+      <div style="padding:16px;background:white;">
+        <div style="border:3px dashed var(--gh-blue);border-radius:12px;padding:40px 20px;text-align:center;background:#F0F7FF;">
+          <p style="font-size:48px;margin-bottom:10px;">📁⬇️</p>
+          <p style="font-weight:700;font-size:15px;">Drag files here to add them to your repository</p>
+          <p style="color:var(--gray-500);font-size:13px;margin-top:6px;">Or <a href="#" style="color:var(--gh-blue);">choose your files</a></p>
+        </div>
+        <p style="margin-top:14px;font-size:12px;color:var(--gray-500);">
+          ✅ index.html  ✅ config.js  ✅ styles.css  ✅ script.js  ✅ tutorial.html  ✅ vercel.json<br>
+          ✅ pasta assets/  ✅ TUTORIAL.md
+        </p>
+      </div>
+    </div>
+
+    <h3>Passo 4.3 — Faça o primeiro Commit</h3>
+    <p>Role pra baixo. Vai aparecer:</p>
+    <ul>
+      <li><strong>Commit message</strong>: escreva <code>Primeiro upload</code> (ou qualquer coisa)</li>
+      <li>Clique no botão verde <strong>Commit changes</strong></li>
+    </ul>
+
+    <div class="tip">
+      ⏱️ Os uploads costumam levar <strong>20 a 60 segundos</strong> dependendo da sua internet. Aguarde tudo terminar antes de clicar em Commit.
+    </div>
+
+    <h3>Passo 4.4 — Confira se deu certo</h3>
+    <p>Você deve ver os arquivos listados na página inicial do repositório. Se aparecer <code>config.js</code>, <code>index.html</code>, <code>tutorial.html</code> etc, deu certo!</p>
+  </section>
+
+  <!-- =================== CAP 0E — VERCEL =================== -->
+  <section id="cap-0e" class="step">
+    <span class="step-tag">Capítulo 5 (Setup)</span>
+    <h2>Criar conta na Vercel e conectar ao GitHub</h2>
+
+    <p>A Vercel é quem vai <strong>publicar</strong> seu site na internet. Também é grátis pra sempre.</p>
+
+    <h3>Passo 5.1 — Acesse a Vercel</h3>
+    <p class="mono" style="font-size:14px;background:var(--gray-100);padding:10px 14px;border-radius:8px;color:var(--pink-d);">
+      https://vercel.com/signup
+    </p>
+
+    <h3>Passo 5.2 — Clique em "Continue with GitHub"</h3>
+    <p>Use sempre o login do GitHub. Assim já fica tudo conectado.</p>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">vercel.com/signup</div>
+      </div>
+      <div style="padding:24px;background:white;text-align:center;">
+        <p style="font-size:18px;font-weight:700;margin-bottom:18px;">▲ Start Deploying</p>
+        <button class="gh-commit-btn pulse" style="background:var(--vc-black);padding:14px 24px;font-size:14px;">
+          <svg style="vertical-align:middle;" width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          &nbsp;&nbsp;Continue with GitHub
+        </button>
+        <p style="font-size:12px;color:var(--gray-500);margin-top:16px;">Free Forever · No credit card</p>
+      </div>
+    </div>
+
+    <h3>Passo 5.3 — Autorize a Vercel</h3>
+    <p>O GitHub vai abrir uma página perguntando se você quer dar permissão à Vercel. Clique em <strong>Authorize Vercel</strong>.</p>
+
+    <h3>Passo 5.4 — Escolha "Hobby" (plano grátis)</h3>
+    <p>Quando perguntar o tipo de conta, escolha <strong>Hobby (free)</strong>. Pode usar seu próprio nome.</p>
+  </section>
+
+  <!-- =================== CAP 0F — DEPLOY =================== -->
+  <section id="cap-0f" class="step">
+    <span class="step-tag">Capítulo 6 (Setup)</span>
+    <h2>Fazer o primeiro deploy (publicar o site)</h2>
+
+    <h3>Passo 6.1 — Importe o repositório do GitHub</h3>
+    <p>Depois do login, a Vercel mostra uma tela de "Import Project". Vai aparecer uma lista dos seus repositórios do GitHub.</p>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">vercel.com/new</div>
+      </div>
+      <div style="padding:18px;background:white;">
+        <p style="font-weight:700;font-size:16px;margin-bottom:14px;">▲ Import Git Repository</p>
+        <div class="vc-deploy highlight">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#6E7681"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59z"/></svg>
+          <div><strong>promocoes-do-dia</strong></div>
+          <span class="branch">main</span>
+          <button class="gh-commit-btn" style="margin-left:auto;font-size:12px;padding:6px 14px;">Import →</button>
+        </div>
+        <p style="font-size:12px;color:var(--gray-500);margin-top:10px;">Clique em <strong>Import</strong> ao lado de <code>promocoes-do-dia</code></p>
+      </div>
+    </div>
+
+    <h3>Passo 6.2 — Aceite as configurações padrão</h3>
+    <p>A Vercel vai mostrar uma tela com configurações de build. <strong>Não mude nada</strong>. Só clique no botão grande <strong>Deploy</strong>.</p>
+
+    <h3>Passo 6.3 — Aguarde ~30 segundos</h3>
+    <p>Vai aparecer uma animação de fogos de artifício 🎆 quando terminar. Pronto, seu site está no ar!</p>
+
+    <h3>Passo 6.4 — Pegue sua URL</h3>
+    <p>A Vercel vai te dar uma URL parecida com:</p>
+    <p class="mono" style="font-size:14px;background:#F0FDF4;padding:10px 14px;border-radius:8px;color:var(--gh-green);border:1px solid #BBF7D0;">
+      https://promocoes-do-dia-xxxxx.vercel.app
+    </p>
+
+    <p>Você pode (e deve) clicar em <strong>Settings</strong> → <strong>Domains</strong> e simplificar pra apenas:</p>
+    <p class="mono" style="font-size:14px;background:#F0FDF4;padding:10px 14px;border-radius:8px;color:var(--gh-green);">
+      https://promocoes-do-dia.vercel.app
+    </p>
+
+    <div class="tip">
+      🎉 <strong>Pronto! Seu site está no ar!</strong> A partir de agora, toda vez que você editar um arquivo no GitHub, a Vercel publica a nova versão sozinha em ~15 segundos.
+    </div>
+  </section>
+
+  <!-- TRANSIÇÃO PARA PARTE 2 -->
+  <div style="background:linear-gradient(135deg,#F0FDF4 0%, #FFF 100%); padding:24px 28px; border-radius:16px; margin-bottom:24px; border:2px dashed var(--gh-green);">
+    <h2 style="color:var(--gh-green);font-size:1.3rem;margin-bottom:8px;">✅ Setup completo!</h2>
+    <p>A partir daqui, é só editar o site quando quiser. Continue lendo a <strong>Parte 2</strong> com tudo que você pode mudar.</p>
+  </div>
+
+  <!-- =================== CAP 1 =================== -->
+  <section id="cap-1" class="step">
+    <span class="step-tag">Capítulo 1</span>
+    <h2>Acessar os arquivos do site no GitHub</h2>
+
+    <p>Todos os arquivos do site moram em um lugar chamado <strong>GitHub</strong>.
+    É como uma "pasta na nuvem" — você abre no navegador, edita os arquivos clicando neles,
+    e o site se atualiza sozinho em 15 segundos.</p>
+
+    <h3>Passo 1.1 — Abra o repositório</h3>
+    <p>Abra esta URL no navegador (computador OU celular funciona):</p>
+    <p class="mono" style="font-size:14px;background:var(--gray-100);padding:10px 14px;border-radius:8px;color:var(--pink-d);">
+      https://github.com/SEU-USUARIO/promocoes-do-dia
+    </p>
+
+    <h3>Passo 1.2 — Faça login no GitHub</h3>
+    <p>Se ainda não estiver logado, clique em <strong>Sign in</strong> no canto superior direito
+    e use seu usuário e senha do GitHub.</p>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">https://github.com/SEU-USUARIO/promocoes-do-dia</div>
+      </div>
+      <div class="gh-header">
+        <svg viewBox="0 0 16 16" fill="white"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        <strong>SEU-USUARIO</strong> / <strong>promocoes-do-dia</strong>
+      </div>
+      <div class="gh-files">
+        <div class="gh-file gh-file-folder">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#54AEFF"><path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75Z"/></svg>
+          <span>assets</span>
+          <span class="gh-file-size">pastas com fotos</span>
+        </div>
+        <div class="gh-file">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+          <span class="gh-file-name">config.js</span>
+          <span class="gh-file-size">esse é o mais importante!</span>
+        </div>
+        <div class="gh-file">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+          <span class="gh-file-name">index.html</span>
+        </div>
+        <div class="gh-file">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+          <span class="gh-file-name">styles.css</span>
+        </div>
+        <div class="gh-file">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+          <span class="gh-file-name">script.js</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip">
+      💡 <strong>Quase tudo se edita pelo arquivo <code>config.js</code>.</strong>
+      Se você só precisa trocar texto, link, ou Pixel — vai sempre nesse único arquivo.
+    </div>
+  </section>
+
+  <!-- =================== CAP 2 =================== -->
+  <section id="cap-2" class="step">
+    <span class="step-tag">Capítulo 2</span>
+    <h2>Trocar o link do WhatsApp</h2>
+
+    <h3>Passo 2.1 — Abra o arquivo config.js</h3>
+    <p>Na lista de arquivos, clique em <code>config.js</code>.</p>
+
+    <h3>Passo 2.2 — Clique no lápis ✏️ pra editar</h3>
+    <p>No canto superior direito do arquivo, tem um ícone de lápis. Clique nele.</p>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">github.com/SEU-USUARIO/promocoes-do-dia/blob/main/config.js</div>
+      </div>
+      <div class="gh-edit-toolbar">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+        <span class="filename">config.js</span>
+        <span class="pencil pulse">✏️ Edit</span>
+      </div>
+      <div class="gh-code">
+        <div class="line"><span class="ln">9</span><span><span class="com">// 1) LINK DO WHATSAPP</span></span></div>
+        <div class="line"><span class="ln">10</span><span><span class="com">// Cole aqui o link do grupo</span></span></div>
+        <div class="line"><span class="ln">11</span><span class="hl"><span class="pun">  </span><span class="kw">whatsappLink</span><span class="pun">: </span><span class="str">"https://chat.whatsapp.com/B9M448ncpTpDhM8wyPQvRK?mode=gi_t"</span><span class="pun">,</span></span></div>
+        <div class="line"><span class="ln">12</span><span></span></div>
+        <div class="line"><span class="ln">13</span><span><span class="com">// 2) META PIXEL ID</span></span></div>
+      </div>
+    </div>
+
+    <h3>Passo 2.3 — Apague o link antigo, cole o novo</h3>
+    <p>Encontre a linha <strong>11</strong> (com a palavra <code>whatsappLink</code>).
+    Cuidado: <strong>mantenha as aspas <code>"..."</code> e a vírgula no final</strong>.
+    Só troque o que está entre as aspas.</p>
+
+    <div class="warn">
+      ⚠️ <strong>Errado:</strong> <code>whatsappLink: https://wa.me/123,</code> (sem aspas)<br>
+      ✅ <strong>Certo:</strong> <code>whatsappLink: "https://wa.me/123",</code>
+    </div>
+
+    <h3>Passo 2.4 — Salvar (Commit changes)</h3>
+    <p>Role até o final da página. Vai aparecer um quadro com 2 campos e um botão verde.</p>
+    <ol>
+      <li>No primeiro campo, escreva o que você mudou (ex: <em>"Atualizei link do WhatsApp"</em>)</li>
+      <li>Clique no botão verde <strong>Commit changes</strong></li>
+    </ol>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">github.com/...editing</div>
+      </div>
+      <div class="gh-commit">
+        <p style="font-weight:600;margin-bottom:8px;">Commit changes</p>
+        <input value="Atualizei link do WhatsApp" />
+        <textarea rows="2" placeholder="Descrição opcional"></textarea>
+        <button class="gh-commit-btn pulse">Commit changes</button>
+      </div>
+    </div>
+
+    <div class="tip">
+      ⏱️ <strong>Em ~15 segundos</strong> a versão nova já está no ar em
+      <a href="https://promocoes-do-dia.vercel.app" target="_blank">promocoes-do-dia.vercel.app</a>
+    </div>
+  </section>
+
+  <!-- =================== CAP 3 =================== -->
+  <section id="cap-3" class="step">
+    <span class="step-tag">Capítulo 3</span>
+    <h2>Configurar o Pixel da Meta (Facebook)</h2>
+
+    <p>O Pixel é o número que o Facebook/Meta dá pra você rastrear quem visita o site
+    e quem clica no botão do WhatsApp.</p>
+
+    <h3>Passo 3.1 — Pegue seu Pixel ID</h3>
+    <ol>
+      <li>Entre em <a href="https://business.facebook.com/events_manager" target="_blank">business.facebook.com/events_manager</a></li>
+      <li>Crie um novo pixel (ou abra um existente)</li>
+      <li>Copie o número que aparece (16 dígitos, ex: <code>1234567890123456</code>)</li>
+    </ol>
+
+    <h3>Passo 3.2 — Cole no config.js</h3>
+    <p>Edite o <code>config.js</code> (como no Capítulo 2), procure a linha <code>metaPixelId</code> e cole o número entre as aspas:</p>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">github.com/.../config.js (edição)</div>
+      </div>
+      <div class="gh-code">
+        <div class="line"><span class="ln">15</span><span><span class="com">// 2) META PIXEL ID</span></span></div>
+        <div class="line"><span class="ln">16</span><span><span class="com">// Cole aqui o número (16 dígitos)</span></span></div>
+        <div class="line"><span class="ln">17</span><span class="hl"><span class="pun">  </span><span class="kw">metaPixelId</span><span class="pun">: </span><span class="str">"1234567890123456"</span><span class="pun">,</span></span></div>
+      </div>
+    </div>
+
+    <p>Faça <strong>Commit changes</strong> e pronto. O pixel começa a contar automaticamente.</p>
+
+    <div class="tip">
+      💡 Pode testar abrindo seu Events Manager no Facebook e olhando o card <em>"Test Events"</em>.
+      Visite o seu site e veja as visitas aparecerem em tempo real.
+    </div>
+  </section>
+
+  <!-- =================== CAP 4 =================== -->
+  <section id="cap-4" class="step">
+    <span class="step-tag">Capítulo 4</span>
+    <h2>Mudar os textos da página</h2>
+
+    <p>Você pode trocar: título, subtítulo, texto do botão verde, selo amarelo, rodapé.</p>
+
+    <h3>Passo 4.1 — Abra o config.js e procure o bloco <code>textos:</code></h3>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">github.com/.../config.js</div>
+      </div>
+      <div class="gh-code">
+        <div class="line"><span class="ln">30</span><span><span class="pun">  </span><span class="kw">textos</span><span class="pun">: {</span></span></div>
+        <div class="line"><span class="ln">31</span><span class="hl"><span class="pun">    </span><span class="kw">titulo</span><span class="pun">: </span><span class="str">"Promoções do Dia"</span><span class="pun">,</span></span></div>
+        <div class="line"><span class="ln">32</span><span class="hl"><span class="pun">    </span><span class="kw">subtitulo</span><span class="pun">: </span><span class="str">"Milhares de cupons..."</span><span class="pun">,</span></span></div>
+        <div class="line"><span class="ln">33</span><span class="hl"><span class="pun">    </span><span class="kw">botaoCta</span><span class="pun">: </span><span class="str">"ENTRAR NO GRUPO EXCLUSIVO"</span><span class="pun">,</span></span></div>
+        <div class="line"><span class="ln">34</span><span class="hl"><span class="pun">    </span><span class="kw">selo</span><span class="pun">: </span><span class="str">"100% Gratuito • Vagas limitadas"</span><span class="pun">,</span></span></div>
+        <div class="line"><span class="ln">35</span><span class="hl"><span class="pun">    </span><span class="kw">rodape</span><span class="pun">: </span><span class="str">"© 2026 Promoções do Dia..."</span><span class="pun">,</span></span></div>
+        <div class="line"><span class="ln">36</span><span><span class="pun">  },</span></span></div>
+      </div>
+    </div>
+
+    <h3>Passo 4.2 — Troque o que está entre as aspas</h3>
+    <p>Cada linha funciona assim:</p>
+    <p><code>nome_da_coisa: "TEXTO QUE APARECE NO SITE",</code></p>
+    <p>Só troque o que está entre <code>"</code> e <code>"</code>. Não apague as aspas nem a vírgula!</p>
+
+    <div class="warn">
+      ⚠️ <strong>Se quiser usar aspas dentro do texto</strong>, use <code>\"</code>. Por exemplo:
+      <code>titulo: "O \"melhor\" grupo",</code>
+    </div>
+  </section>
+
+  <!-- =================== CAP 5 =================== -->
+  <section id="cap-5" class="step">
+    <span class="step-tag">Capítulo 5</span>
+    <h2>Trocar a foto de fundo (Aline com tablet)</h2>
+
+    <h3>Passo 5.1 — Entre na pasta <code>assets</code></h3>
+    <p>Volte pra página inicial do repositório e clique na pasta <strong>assets</strong>.</p>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">github.com/SEU-USUARIO/promocoes-do-dia/tree/main/assets</div>
+      </div>
+      <div class="gh-files">
+        <div class="gh-file highlight">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+          <span class="gh-file-name">aline-background.jpg</span>
+          <span class="gh-file-size">← clique aqui</span>
+        </div>
+        <div class="gh-file">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#6E7681"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Z"/></svg>
+          <span class="gh-file-name">logo-grupo.png</span>
+        </div>
+        <div class="gh-file gh-file-folder">
+          <svg class="gh-file-icon" viewBox="0 0 16 16" fill="#54AEFF"><path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75Z"/></svg>
+          <span>marketplaces</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Passo 5.2 — Apague o arquivo atual</h3>
+    <p>Clique em <code>aline-background.jpg</code>. Depois clique no ícone de <strong>lixeira</strong> 🗑️ (canto superior direito). Confirme em <em>"Commit changes"</em>.</p>
+
+    <h3>Passo 5.3 — Suba a foto nova</h3>
+    <ol>
+      <li>Volte pra pasta <code>assets</code></li>
+      <li>No canto superior direito, clique em <strong>Add file</strong> → <strong>Upload files</strong></li>
+      <li>Arraste a nova foto do seu computador pra área indicada</li>
+      <li><strong>IMPORTANTE</strong>: o arquivo precisa se chamar <strong>exatamente</strong> <code>aline-background.jpg</code>. Se a sua foto tiver outro nome, renomeie antes de subir.</li>
+      <li>Role pra baixo, escreva uma descrição ("Troquei foto da Aline") e clique <strong>Commit changes</strong></li>
+    </ol>
+
+    <div class="tip">
+      📐 Use uma foto com <strong>pelo menos 1080×1080 pixels</strong>. Quanto maior, mais bonito fica o fundo desfocado.
+    </div>
+  </section>
+
+  <!-- =================== CAP 6 =================== -->
+  <section id="cap-6" class="step">
+    <span class="step-tag">Capítulo 6</span>
+    <h2>Trocar a logo do grupo</h2>
+
+    <p>Mesmo procedimento do Capítulo 5, mas o arquivo é <code>logo-grupo.png</code> (na pasta <code>assets</code>).</p>
+
+    <ol>
+      <li>Entre na pasta <code>assets</code></li>
+      <li>Clique em <code>logo-grupo.png</code> → 🗑️ apagar</li>
+      <li>Suba sua logo nova, garantindo que o nome é <strong>exatamente</strong> <code>logo-grupo.png</code></li>
+      <li>Commit</li>
+    </ol>
+
+    <div class="tip">
+      📐 Logo <strong>quadrada</strong> (ex: 500×500) com fundo <strong>transparente</strong> fica perfeita.
+    </div>
+  </section>
+
+  <!-- =================== CAP 7 =================== -->
+  <section id="cap-7" class="step">
+    <span class="step-tag">Capítulo 7</span>
+    <h2>Adicionar / remover / trocar marketplaces</h2>
+
+    <h3>Trocar a logo de um marketplace existente</h3>
+    <ol>
+      <li>Entre em <code>assets/marketplaces/</code></li>
+      <li>Apague a logo antiga (ex: <code>shopee.png</code>)</li>
+      <li>Suba a nova com o <strong>mesmo nome</strong></li>
+      <li>Commit</li>
+    </ol>
+
+    <h3>Adicionar um marketplace novo</h3>
+    <ol>
+      <li>Suba a logo em <code>assets/marketplaces/</code> com um nome simples sem espaços nem acentos (ex: <code>kabum.png</code>)</li>
+      <li>Edite o <code>config.js</code></li>
+      <li>Procure o bloco <code>marketplaces:</code></li>
+      <li>Adicione uma nova linha <strong>antes</strong> do <code>],</code> final:</li>
+    </ol>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">github.com/.../config.js (edição)</div>
+      </div>
+      <div class="gh-code">
+        <div class="line"><span class="ln">66</span><span><span class="pun">  </span><span class="kw">marketplaces</span><span class="pun">: [</span></span></div>
+        <div class="line"><span class="ln">67</span><span><span class="pun">    { </span><span class="kw">nome</span><span class="pun">: </span><span class="str">"Shopee"</span><span class="pun">, </span><span class="kw">arquivo</span><span class="pun">: </span><span class="str">"shopee.png"</span><span class="pun"> },</span></span></div>
+        <div class="line"><span class="ln">68</span><span><span class="pun">    { </span><span class="kw">nome</span><span class="pun">: </span><span class="str">"Amazon"</span><span class="pun">, </span><span class="kw">arquivo</span><span class="pun">: </span><span class="str">"amazon.png"</span><span class="pun"> },</span></span></div>
+        <div class="line"><span class="ln">69</span><span><span class="pun">    { </span><span class="kw">nome</span><span class="pun">: </span><span class="str">"Mercado Livre"</span><span class="pun">, </span><span class="kw">arquivo</span><span class="pun">: </span><span class="str">"mercadolivre.png"</span><span class="pun"> },</span></span></div>
+        <div class="line"><span class="ln">70</span><span class="hl"><span class="pun">    { </span><span class="kw">nome</span><span class="pun">: </span><span class="str">"Kabum"</span><span class="pun">, </span><span class="kw">arquivo</span><span class="pun">: </span><span class="str">"kabum.png"</span><span class="pun"> },  </span><span class="com">// ← NOVO</span></span></div>
+        <div class="line"><span class="ln">71</span><span><span class="pun">  ],</span></span></div>
+      </div>
+    </div>
+
+    <h3>Remover um marketplace</h3>
+    <p>Apague a <strong>linha inteira</strong> do marketplace no <code>config.js</code> (incluindo a vírgula). Opcional: apague também o arquivo da logo em <code>assets/marketplaces/</code>.</p>
+  </section>
+
+  <!-- =================== CAP 8 =================== -->
+  <section id="cap-8" class="step">
+    <span class="step-tag">Capítulo 8</span>
+    <h2>Adicionar / remover nomes do pop-up</h2>
+
+    <p>Aquele pop-up "Fulano acabou de entrar no grupo" pega nomes aleatórios de uma lista.</p>
+
+    <ol>
+      <li>Edite o <code>config.js</code></li>
+      <li>Procure o bloco <code>nomesPopup:</code> (linha ~42)</li>
+      <li>Adicione novos nomes <strong>entre aspas</strong>, separados por vírgula</li>
+    </ol>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">github.com/.../config.js</div>
+      </div>
+      <div class="gh-code">
+        <div class="line"><span class="ln">42</span><span><span class="pun">  </span><span class="kw">nomesPopup</span><span class="pun">: [</span></span></div>
+        <div class="line"><span class="ln">43</span><span><span class="pun">    </span><span class="str">"Rafael"</span><span class="pun">, </span><span class="str">"Mariana"</span><span class="pun">, </span><span class="str">"João"</span><span class="pun">, </span><span class="str">"Aline"</span><span class="pun">,</span></span></div>
+        <div class="line"><span class="ln">44</span><span class="hl"><span class="pun">    </span><span class="str">"Carlos"</span><span class="pun">, </span><span class="str">"Beatriz"</span><span class="pun">,</span> <span class="com">// ← novos nomes</span></span></div>
+        <div class="line"><span class="ln">45</span><span><span class="pun">  ],</span></span></div>
+      </div>
+    </div>
+
+    <div class="tip">
+      💡 O sistema garante que o mesmo nome <strong>nunca aparece 2 vezes seguidas</strong>.
+      Quanto mais nomes você colocar, mais natural fica.
+    </div>
+  </section>
+
+  <!-- =================== CAP 9 =================== -->
+  <section id="cap-9" class="step">
+    <span class="step-tag">Capítulo 9</span>
+    <h2>Ver o site atualizado</h2>
+
+    <p>Depois de qualquer alteração:</p>
+
+    <ol>
+      <li><strong>Aguarde 15–30 segundos</strong> após o Commit</li>
+      <li>Acesse <a href="https://promocoes-do-dia.vercel.app" target="_blank">promocoes-do-dia.vercel.app</a></li>
+      <li><strong>Atualize com Ctrl+F5</strong> (Windows) ou <strong>Cmd+Shift+R</strong> (Mac) pra forçar o navegador a buscar a versão nova</li>
+    </ol>
+
+    <h3>Acompanhar o status do deploy</h3>
+    <p>Você pode ver "ao vivo" se o deploy deu certo em:</p>
+    <p class="mono" style="font-size:13px;background:var(--gray-100);padding:10px 14px;border-radius:8px;color:var(--pink-d);">
+      https://vercel.com/achadinhos/promocoes-do-dia
+    </p>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">vercel.com/achadinhos/promocoes-do-dia</div>
+      </div>
+      <div class="vc-header">
+        ▲ <strong>achadinhos / promocoes-do-dia</strong>
+      </div>
+      <div class="vc-content">
+        <p style="font-weight:700;margin-bottom:10px;">Production Deployments</p>
+        <div class="vc-deploy highlight">
+          <div class="status"></div>
+          <div><strong>Atualizei link do WhatsApp</strong></div>
+          <span class="branch">main</span>
+          <span class="branch">Ready</span>
+          <span class="menu">⋯</span>
+        </div>
+        <div class="vc-deploy">
+          <div class="status"></div>
+          <div>Deploy inicial</div>
+          <span class="branch">main</span>
+          <span class="branch">Ready</span>
+          <span class="menu">⋯</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip">
+      🟢 Bolinha verde = deu certo, site no ar &nbsp;|&nbsp; 🟡 Amarela = ainda fazendo deploy &nbsp;|&nbsp; 🔴 Vermelha = deu erro
+    </div>
+  </section>
+
+  <!-- =================== CAP 10 =================== -->
+  <section id="cap-10" class="step">
+    <span class="step-tag">Capítulo 10</span>
+    <h2>Voltar uma versão antiga (rollback)</h2>
+
+    <p>Errou algo? Sem stress — dá pra voltar pra qualquer versão antiga em <strong>2 cliques</strong>.</p>
+
+    <ol>
+      <li>Acesse <a href="https://vercel.com/achadinhos/promocoes-do-dia" target="_blank">o painel da Vercel</a></li>
+      <li>Clique na aba <strong>Deployments</strong></li>
+      <li>Encontre a versão que estava funcionando bem</li>
+      <li>Clique nos <strong>3 pontinhos ⋯</strong> à direita</li>
+      <li>Clique em <strong>Promote to Production</strong></li>
+      <li>Confirme e pronto — site voltou em ~5 segundos</li>
+    </ol>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">vercel.com/achadinhos/promocoes-do-dia/deployments</div>
+      </div>
+      <div class="vc-content">
+        <div class="vc-deploy">
+          <div class="status"></div>
+          <div>Versão atual (com erro)</div>
+          <span class="branch">main</span>
+          <span class="menu">⋯</span>
+        </div>
+        <div class="vc-deploy highlight">
+          <div class="status"></div>
+          <div><strong>← Versão boa anterior</strong> (clique nos ⋯ aqui)</div>
+          <span class="branch">main</span>
+          <span class="menu" style="font-weight:900;color:var(--pink);">⋯</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip">
+      🛡️ A Vercel guarda <strong>TODAS</strong> as versões pra sempre. Pode voltar pra qualquer uma, mesmo de semanas atrás.
+    </div>
+  </section>
+
+  <!-- =================== CAP 11 =================== -->
+  <section id="cap-11" class="step">
+    <span class="step-tag">Capítulo 11</span>
+    <h2>Configurar domínio próprio (opcional)</h2>
+
+    <p>Se você comprou um domínio (ex: <code>promocoesdodia.com.br</code>) e quer usar no lugar de <code>.vercel.app</code>:</p>
+
+    <ol>
+      <li>Painel Vercel → <strong>Settings</strong> → <strong>Domains</strong></li>
+      <li>Digite o domínio: <code>promocoesdodia.com.br</code> → <strong>Add</strong></li>
+      <li>A Vercel mostra <strong>2 registros DNS</strong> que você precisa adicionar no seu provedor (Registro.br, GoDaddy, Hostinger, etc.)</li>
+      <li>Adicione lá no provedor</li>
+      <li>Aguarde 5–30 minutos. A Vercel detecta sozinho e ativa HTTPS de graça.</li>
+    </ol>
+  </section>
+
+  <!-- =================== FAQ =================== -->
+  <section id="cap-faq" class="step faq">
+    <span class="step-tag">Dúvidas frequentes</span>
+    <h2>FAQ — Problemas comuns e soluções</h2>
+
+    <details>
+      <summary>A página apareceu toda branca/quebrada depois que editei</summary>
+      <div class="faq-body">
+        <p>Geralmente acontece quando alguma vírgula ou aspa foi removida no <code>config.js</code>.</p>
+        <p><strong>Solução rápida</strong>: faça o rollback (Capítulo 10) pra última versão funcionando.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>A nova foto/logo não apareceu</summary>
+      <div class="faq-body">
+        <p>Confira:</p>
+        <ul>
+          <li>O nome do arquivo está <strong>exatamente igual</strong> ao antigo? (Ex: <code>aline-background.jpg</code>, letra minúscula, com hífen, sem espaço)</li>
+          <li>O arquivo está na <strong>pasta certa</strong>? (assets/ pra fundo/logo; assets/marketplaces/ pra logos de loja)</li>
+          <li>Você atualizou a página com <strong>Ctrl+F5 / Cmd+Shift+R</strong>?</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>O botão do WhatsApp leva pra lugar errado</summary>
+      <div class="faq-body">
+        <p>Abra o <code>config.js</code> e confira a linha <code>whatsappLink:</code>:</p>
+        <ul>
+          <li>O link precisa começar com <code>https://</code></li>
+          <li>Precisa estar entre <strong>aspas duplas</strong>: <code>"https://..."</code></li>
+          <li>Não esqueça da <strong>vírgula no final</strong></li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>O pop-up "Fulano entrou" não aparece</summary>
+      <div class="faq-body">
+        <ul>
+          <li>Aguarde <strong>3–4 segundos</strong> após abrir a página (não aparece imediato)</li>
+          <li>Verifique se o JavaScript está habilitado no navegador</li>
+          <li>Tente em modo anônimo (Ctrl+Shift+N / Cmd+Shift+N)</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Como ver quantas pessoas visitaram o site?</summary>
+      <div class="faq-body">
+        <p>No painel da Vercel → <strong>Analytics</strong> (menu superior). Mostra visitas, visualizações, dispositivos e países.</p>
+        <p>Free Tier dá <strong>2.500 eventos/mês grátis</strong> — mais que suficiente pra começar.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Não consigo logar no GitHub do celular</summary>
+      <div class="faq-body">
+        <p>Baixe o app oficial do GitHub na Play Store ou App Store. Ele tem o mesmo editor do site, perfeito pra editar arquivos quando estiver fora de casa.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Preciso pagar alguma coisa pra usar Vercel/GitHub?</summary>
+      <div class="faq-body">
+        <p><strong>Não.</strong> Tanto o GitHub quanto a Vercel oferecem planos gratuitos que aguentam tranquilamente o tráfego de uma landing page. Você só precisaria pagar se chegar em milhões de visitas/mês.</p>
+      </div>
+    </details>
+
+  </section>
+
+  <!-- CTA Final -->
+  <div class="final-cta">
+    <h2>🎉 Pronto, você já sabe tudo!</h2>
+    <p>Agora pode editar o site sempre que precisar — sem depender de ninguém.</p>
+    <p style="margin-top:14px;font-size:.95rem;opacity:.95;">
+      Esse tutorial está sempre disponível em <strong>promocoes-do-dia.vercel.app/tutorial.html</strong>
+    </p>
+  </div>
+
+</div>
+
+<a href="#" class="nav-jump">⬆ Topo</a>
+
+</body>
+</html>

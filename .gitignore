@@ -1,0 +1,41 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel
+.vercel/
+
+# Claude/Dev tooling
+.claude/
+.server.cjs
+.clean-pngs.py
+
+# Logs
+*.log
+
+# Backup
+*.bak
+*.tmp
+*.zip
+*.orig
+*.copy
+
+# Build
+dist/
+build/
