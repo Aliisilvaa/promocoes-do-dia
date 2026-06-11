@@ -19,7 +19,7 @@ window.SITE_CONFIG = {
   //    Exemplo: "1234567890123456"
   //    Deixe como "" (vazio) se ainda não tiver.
   // -------------------------------------------------------------------
-  metaPixelId: "",
+  metaPixelId: "2159079971554057",
 
   // -------------------------------------------------------------------
   // 3) FRASES PRINCIPAIS DA PÁGINA
